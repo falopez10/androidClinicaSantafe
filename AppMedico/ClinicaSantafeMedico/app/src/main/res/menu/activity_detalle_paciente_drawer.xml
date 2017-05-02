@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_tratamientos"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Ver tratamientos" />
+        <item
+            android:id="@+id/nav_examenes"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Ver examenes" />
+        <item
+            android:id="@+id/nav_diagnosticos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Ver Diagnosticos" />
+        <item
+            android:id="@+id/nav_registros"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Ver registros de mediciones" />
+    </group>
+
+    <item android:title="Acciones">
+        <menu>
+            <item
+                android:id="@+id/nav_consejo"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Enviar consejo" />
+        </menu>
+    </item>
+
+</menu>

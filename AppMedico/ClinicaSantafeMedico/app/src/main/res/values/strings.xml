@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Medico clinica santafe</string>
+    <string name="edit_message">Ingrese un mensaje</string>
+    <string name="button_get_pacientes">Ver lista de pacientes</string>
+    <string name="get_pacientes_txt">Pacientes disponibles:</string>
+    <string name="button_post_paciente">Crear Paciente</string>
+    <string name="txt_create_paciente">Llene el formulario para crear paciente</string>
+
+    <string name="title_activity_detalle_paciente">Detalles del paciente</string>
+    <string name="title_activity_get_pacientes">Lista de pacientes disponibles</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Ajustes</string>
+</resources>
