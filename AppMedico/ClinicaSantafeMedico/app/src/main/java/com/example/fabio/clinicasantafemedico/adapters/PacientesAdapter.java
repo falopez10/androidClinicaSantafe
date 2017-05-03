@@ -1,4 +1,4 @@
-package com.example.fabio.clinicasantafemedico;
+package com.example.fabio.clinicasantafemedico.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.fabio.clinicasantafemedico.R;
+import com.example.fabio.clinicasantafemedico.models.Paciente;
 
 import java.util.ArrayList;
 

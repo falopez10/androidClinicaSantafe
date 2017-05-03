@@ -1,4 +1,4 @@
-package com.example.fabio.clinicasantafepaciente;
+package com.example.fabio.clinicasantafepaciente.models;
 
 /**
  * Created by fabio on 01/05/2017.

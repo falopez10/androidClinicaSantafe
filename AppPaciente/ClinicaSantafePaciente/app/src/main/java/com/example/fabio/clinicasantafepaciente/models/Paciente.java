@@ -1,9 +1,9 @@
-package com.example.fabio.clinicasantafemedico;
+package com.example.fabio.clinicasantafepaciente.models;
 
 import java.util.ArrayList;
 
 /**
- * Created by fabio on 26/04/2017.
+ * Created by fabio on 01/05/2017.
  */
 
 public class Paciente {
@@ -53,3 +53,4 @@ public class Paciente {
 
 
 }
+

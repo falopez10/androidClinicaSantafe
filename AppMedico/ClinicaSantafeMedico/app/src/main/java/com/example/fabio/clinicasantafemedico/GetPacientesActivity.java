@@ -8,9 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 
+import com.example.fabio.clinicasantafemedico.adapters.PacientesAdapter;
+import com.example.fabio.clinicasantafemedico.models.Paciente;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -76,7 +77,6 @@ public class GetPacientesActivity extends AppCompatActivity {
     {
         try {
             JSONArray jsonArray = new JSONArray(new String(responseBody));
-            List<String> sPacientes = new ArrayList<String>();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject json_data = jsonArray.getJSONObject(i);
                 int id = json_data.getInt("id");
