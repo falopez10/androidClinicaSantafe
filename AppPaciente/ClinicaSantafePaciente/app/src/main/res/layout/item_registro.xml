@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvFechaExpedicionR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="Fecha Expedicion: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+    <TextView
+        android:id="@+id/tvFrecuenciaCardiaca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="frecuencia cardiaca: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+    <TextView
+        android:id="@+id/tvPresionSanguinea1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="presion Sanguinea 1: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+    <TextView
+        android:id="@+id/tvPresionSanguinea2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="presion Sanguinea 2: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+    <TextView
+        android:id="@+id/tvNivelEstres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="nivel de estres: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+    <TextView
+        android:id="@+id/tvNivelActividadFisica"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="nivel de actividad fisica: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+
+</LinearLayout>

@@ -3,16 +3,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/tvDescD"
+        android:id="@+id/tvTipoE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/fab_margin"
-        android:text="Descripcion: "
+        android:text="Tipo: "
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/fab_txt_size"/>
 
     <TextView
-        android:id="@+id/tvFechaD"
+        android:id="@+id/tvResultadosE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="Resultados: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+
+    <TextView
+        android:id="@+id/tvFechaE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/fab_margin"
