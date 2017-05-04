@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ClinicaSantafePaciente</string>
+    <string name="app_name">Paciente clinica santafe</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
