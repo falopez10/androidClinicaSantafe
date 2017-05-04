@@ -18,6 +18,10 @@
             android:id="@+id/nav_registros"
             android:icon="@drawable/ic_menu_manage"
             android:title="Ver registros de mediciones" />
+        <item
+            android:id="@+id/nav_consejos"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Ver consejos" />
     </group>
 
     <item android:title="Acciones">

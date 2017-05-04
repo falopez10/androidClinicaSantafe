@@ -1,5 +1,6 @@
 package com.example.fabio.clinicasantafemedico;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,13 +15,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fabio.clinicasantafemedico.adapters.ConsejosAdapter;
+import com.example.fabio.clinicasantafemedico.adapters.DiagnosticosAdapter;
+import com.example.fabio.clinicasantafemedico.adapters.ExamenesAdapter;
+import com.example.fabio.clinicasantafemedico.adapters.RegistrosAdapter;
+import com.example.fabio.clinicasantafemedico.adapters.TratamientosAdapter;
+import com.example.fabio.clinicasantafemedico.models.Consejo;
+import com.example.fabio.clinicasantafemedico.models.Diagnostico;
+import com.example.fabio.clinicasantafemedico.models.Examen;
 import com.example.fabio.clinicasantafemedico.models.Paciente;
+import com.example.fabio.clinicasantafemedico.models.Registro;
+import com.example.fabio.clinicasantafemedico.models.Tratamiento;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -28,6 +42,7 @@ public class DetallePacienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Paciente paciente;
     private TextView tvDetalle;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +67,7 @@ public class DetallePacienteActivity extends AppCompatActivity
 
         //--------------------------------FUNCIONALIDADES-----------------------------------------//
         tvDetalle = (TextView) findViewById(R.id.tvDetalle);
+        listView = (ListView) findViewById(R.id.list);
 
     }
 
@@ -107,7 +123,9 @@ public class DetallePacienteActivity extends AppCompatActivity
             requestDiagnosticosHttp();
         } else if (id == R.id.nav_registros) {
             requestRegistrosHttp();
-        } else if (id == R.id.nav_consejo) {
+        } else if (id == R.id.nav_consejos) {
+            requestConsejosHttp();
+        }else if (id == R.id.nav_consejo) {
             desplegarFormatoEnvioConsejo();
         }
 
@@ -121,13 +139,19 @@ public class DetallePacienteActivity extends AppCompatActivity
     {
         String urlGetTratamientos = MainActivity.IP_Y_PUERTO+"/paciente/tratamientoID/"+paciente.id;
         AsyncHttpClient client = new AsyncHttpClient();
+        final Activity thisAct = this;
         client.get(urlGetTratamientos, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 if (responseBody != null) {
-                    String responseTxt = new String(responseBody);
-                    tvDetalle.setText(responseTxt);
+                    tvDetalle.setText("tratamientos: ");
+                    //traduccion del response a un arreglo
+                    ArrayList<Tratamiento> tratamientos = new ArrayList<Tratamiento>();
+                    TratamientosAdapter.traducirJSON(responseBody,tratamientos);
+                    //Con arreglo se crea adapter, que genera la listView
+                    final TratamientosAdapter adapter = new TratamientosAdapter(thisAct, tratamientos);
+                    listView.setAdapter(adapter);
                 }
             }
 
@@ -143,14 +167,19 @@ public class DetallePacienteActivity extends AppCompatActivity
     {
         String urlGetRegistros = MainActivity.IP_Y_PUERTO+"/paciente/registroID/"+paciente.id;
         AsyncHttpClient client = new AsyncHttpClient();
+        final Activity thisAct = this;
         client.get(urlGetRegistros, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 if (responseBody != null) {
-                    String responseTxt = new String(responseBody);
-
-                    tvDetalle.setText(responseTxt);
+                    tvDetalle.setText("registros: ");
+                    //traduccion del response a un arreglo
+                    ArrayList<Registro> registros = new ArrayList<Registro>();
+                    RegistrosAdapter.traducirJSON(responseBody,registros);
+                    //Con arreglo se crea adapter, que genera la listView
+                    final RegistrosAdapter adapter = new RegistrosAdapter(thisAct, registros);
+                    listView.setAdapter(adapter);
                 }
             }
 
@@ -166,13 +195,20 @@ public class DetallePacienteActivity extends AppCompatActivity
     {
         String urlGetExamenes = MainActivity.IP_Y_PUERTO+"/paciente/examenID/"+paciente.id ;
         AsyncHttpClient client = new AsyncHttpClient();
+        final Activity thisAct = this;
         client.get(urlGetExamenes, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 if (responseBody != null) {
                     String responseTxt = new String(responseBody);
-                    tvDetalle.setText(responseTxt);
+                    tvDetalle.setText("examenes: ");
+                    //traduccion del response a un arreglo
+                    ArrayList<Examen> examenes = new ArrayList<Examen>();
+                    ExamenesAdapter.traducirJSON(responseBody,examenes);
+                    //Con arreglo se crea adapter, que genera la listView
+                    final ExamenesAdapter adapter = new ExamenesAdapter(thisAct, examenes);
+                    listView.setAdapter(adapter);
                 }
             }
 
@@ -188,13 +224,49 @@ public class DetallePacienteActivity extends AppCompatActivity
     {
         String urlGetDiagnosticos = MainActivity.IP_Y_PUERTO+"/paciente/diagnosticoID/"+paciente.id ;
         AsyncHttpClient client = new AsyncHttpClient();
+        final Activity thisAct = this;
         client.get(urlGetDiagnosticos, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 if (responseBody != null) {
                     String responseTxt = new String(responseBody);
-                    tvDetalle.setText(responseTxt);
+                    tvDetalle.setText("diagnosticos: ");
+                    //traduccion del response a un arreglo
+                    ArrayList<Diagnostico> diagnosticos = new ArrayList<Diagnostico>();
+                    DiagnosticosAdapter.traducirJSON(responseBody,diagnosticos);
+                    //Con arreglo se crea adapter, que genera la listView
+                    final DiagnosticosAdapter adapter = new DiagnosticosAdapter(thisAct, diagnosticos);
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.d("Fallo: ", error.getMessage());
+                requestDiagnosticosHttp();
+            }
+        });
+    }
+
+    private void requestConsejosHttp()
+    {
+        String urlGetConsejos = MainActivity.IP_Y_PUERTO+"/paciente/consejo/"+paciente.id ;
+        AsyncHttpClient client = new AsyncHttpClient();
+        final Activity thisAct = this;
+        client.get(urlGetConsejos, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                if (responseBody != null) {
+                    String responseTxt = new String(responseBody);
+                    tvDetalle.setText("consejos: ");
+                    //traduccion del response a un arreglo
+                    ArrayList<Consejo> consejos = new ArrayList<Consejo>();
+                    ConsejosAdapter.traducirJSON(responseBody,consejos);
+                    //Con arreglo se crea adapter, que genera la listView
+                    final ConsejosAdapter adapter = new ConsejosAdapter(thisAct, consejos);
+                    listView.setAdapter(adapter);
                 }
             }
 
@@ -209,6 +281,7 @@ public class DetallePacienteActivity extends AppCompatActivity
     private void desplegarFormatoEnvioConsejo() {
         //Se hacen visibles solo los campos para enviar consejo
         tvDetalle.setVisibility(View.GONE);
+        listView.setVisibility(View.GONE);
         EditText editAsunto = (EditText)findViewById(R.id.editAsunto);
         editAsunto.setVisibility(View.VISIBLE);
         EditText editConsejo = (EditText)findViewById(R.id.editConsejo);
@@ -229,6 +302,7 @@ public class DetallePacienteActivity extends AppCompatActivity
         requestPostConsejoHttp(asunto, descripcion);
         Toast.makeText(this, "Consejo enviado!", Toast.LENGTH_SHORT).show();
         tvDetalle.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.VISIBLE);
         editAsunto.setVisibility(View.GONE);
         editConsejo.setVisibility(View.GONE);
         btnEnviarConsejo.setVisibility(View.GONE);

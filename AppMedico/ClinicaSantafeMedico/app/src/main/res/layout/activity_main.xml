@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    android:weightSum="1">
 
+
+    <ImageView
+        android:id="@+id/imageViewMedico"
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:layout_weight="0.80"
+        app:srcCompat="@mipmap/contacts_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="0.11">
+
+        <TextView
+            android:id="@+id/tvNombreM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Carlos"
+            android:textAlignment="center"
+            android:textSize="@dimen/fab_txt_size"
+            />
+
+        <TextView
+            android:id="@+id/tvApellidoM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Castro"
+            android:textSize="@dimen/fab_txt_size"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCorreoM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="carlos@hotmail.com"
+        android:textAlignment="center"
+        android:textSize="@dimen/fab_txt_size"
+        android:paddingBottom="@dimen/fab_margin"/>
 
     <Button
         android:id="@+id/btnGet"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_get_pacientes"
-        android:onClick="getPacientes"/>
-
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:onClick="getPacientes"
+        android:text="@string/button_get_pacientes" />
 
 
 </LinearLayout>

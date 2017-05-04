@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvDescT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="Descripcion: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+
+    <TextView
+        android:id="@+id/tvFechaInicioT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="Fecha Inicio: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+
+    <TextView
+        android:id="@+id/tvFechaFinT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/fab_margin"
+        android:text="Fecha Fin: "
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/fab_txt_size"/>
+</LinearLayout>

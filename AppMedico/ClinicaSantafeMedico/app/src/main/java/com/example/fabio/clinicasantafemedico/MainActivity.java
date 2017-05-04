@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.fabio.clinicasantafemedico.models.Medico;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
@@ -35,9 +36,55 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        requestGetMedicoHttp();//Se obtiene el medico y se agregan los valores
     }
 
-    /** SE USA cuando desde xml se oprimer boton get */
+    public void requestGetMedicoHttp()
+    {
+        int idMedico = 1;
+        String urlGetMedico = MainActivity.IP_Y_PUERTO+"/medico/"+idMedico; //Por ahora siempre es Carlos Castro
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(urlGetMedico, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                if (responseBody != null) {
+                    traducirJSON(responseBody);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.d("Fallo en get: ", error.getMessage());
+                requestGetMedicoHttp();
+            }
+        });
+    }
+
+    private void traducirJSON(byte[] responseBody) {
+        try {
+            JSONObject jObject = new JSONObject(new String(responseBody));
+            int id = jObject.getInt("id");
+            String nombre = jObject.getString("nombre");
+            String apellido = jObject.getString("apellido");
+            String correo = jObject.getString("correo");
+
+            TextView tvNombreM = (TextView)findViewById(R.id.tvNombreM);
+            TextView tvApellidoM = (TextView)findViewById(R.id.tvApellidoM);
+            TextView tvCorreoM =  (TextView) findViewById(R.id.tvCorreoM);
+
+            tvNombreM.setText(nombre);
+            tvApellidoM.setText(apellido);
+            tvCorreoM.setText(correo);
+
+            setContentView(R.layout.activity_main);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** SE USA cuando desde xml se oprime boton get */
     public void getPacientes(View view) {
         //El intent no hace nada mas que asignar la activity pues no le metimos un string como parametro
         // ni nada pero puede ser util para el POST.
@@ -45,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
 
 
 
