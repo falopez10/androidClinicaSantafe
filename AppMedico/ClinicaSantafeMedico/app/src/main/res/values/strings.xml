@@ -14,4 +14,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Ajustes</string>
+    <string name="promt_fecha_inicio">Fecha inicio: DD/MM/YYYY</string>
+    <string name="prompt_fecha_fin">Fecha fin: DD/MM/YYYY</string>
 </resources>

@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,14 +109,16 @@ public class DetallePacienteActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        //Vuelve a la normalidad
+        LinearLayout llRegistrosFecha = (LinearLayout) findViewById(R.id.llRegistrosFechas);
+        llRegistrosFecha.setVisibility(View.GONE);
+
         if (id == R.id.nav_tratamientos) {
-            // Handle the camera action
             requestTratamientosHttp();
         } else if (id == R.id.nav_examenes) {
             requestExamenesHttp();
@@ -123,6 +126,7 @@ public class DetallePacienteActivity extends AppCompatActivity
             requestDiagnosticosHttp();
         } else if (id == R.id.nav_registros) {
             requestRegistrosHttp();
+            mostrarFormatoSeleccionFechasRegistros();
         } else if (id == R.id.nav_consejos) {
             requestConsejosHttp();
         }else if (id == R.id.nav_consejo) {
@@ -163,6 +167,17 @@ public class DetallePacienteActivity extends AppCompatActivity
         });
     }
 
+    private void mostrarFormatoSeleccionFechasRegistros()
+    {
+        LinearLayout llRegistrosFecha = (LinearLayout) findViewById(R.id.llRegistrosFechas);
+        llRegistrosFecha.setVisibility(View.VISIBLE);
+    }
+
+    public void enviarPeticionRegistroRangoFechas(View view)
+    {
+
+    }
+
     private void requestRegistrosHttp()
     {
         String urlGetRegistros = MainActivity.IP_Y_PUERTO+"/paciente/registroID/"+paciente.id;
@@ -173,7 +188,7 @@ public class DetallePacienteActivity extends AppCompatActivity
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 if (responseBody != null) {
-                    tvDetalle.setText("registros: ");
+                    tvDetalle.setText("Registros (por fecha): ");
                     //traduccion del response a un arreglo
                     ArrayList<Registro> registros = new ArrayList<Registro>();
                     RegistrosAdapter.traducirJSON(responseBody,registros);
