@@ -16,12 +16,16 @@
             android:title="Ver Diagnosticos" />
         <item
             android:id="@+id/nav_registros"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="Ver registros de mediciones" />
         <item
             android:id="@+id/nav_consejos"
             android:icon="@drawable/ic_menu_share"
             android:title="Ver consejos" />
+        <item
+            android:id="@+id/nav_recibir_notificaciones"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Recibir notificaciones" />
     </group>
 
     <item android:title="Acciones">
@@ -30,7 +34,13 @@
                 android:id="@+id/nav_consejo"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Enviar consejo" />
+            <item
+                android:id="@+id/nav_config_marcapasos"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Configurar Marcapasos" />
+
         </menu>
+
     </item>
 
 </menu>

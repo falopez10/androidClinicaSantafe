@@ -64,6 +64,7 @@
             android:id="@+id/btnRangoFechas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Ver"
             />
     </LinearLayout>
 
@@ -99,7 +100,7 @@
         android:id="@+id/btnEnviarConsejo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="enviarConsejo"
+        android:onClick="accionBoton"
         android:text="Enviar Consejo a Paciente"
         android:visibility="gone" />
 </LinearLayout>

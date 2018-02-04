@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -36,6 +37,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -44,6 +46,9 @@ public class DetallePacienteActivity extends AppCompatActivity
     private Paciente paciente;
     private TextView tvDetalle;
     private ListView listView;
+    EditText editAsunto;
+    EditText editConsejo;
+    Button btnEnviarConsejo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,9 @@ public class DetallePacienteActivity extends AppCompatActivity
         //--------------------------------FUNCIONALIDADES-----------------------------------------//
         tvDetalle = (TextView) findViewById(R.id.tvDetalle);
         listView = (ListView) findViewById(R.id.list);
+        editAsunto = (EditText)findViewById(R.id.editAsunto);
+        editConsejo = (EditText)findViewById(R.id.editConsejo);
+        btnEnviarConsejo = (Button)findViewById(R.id.btnEnviarConsejo);
 
     }
 
@@ -115,8 +123,7 @@ public class DetallePacienteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //Vuelve a la normalidad
-        LinearLayout llRegistrosFecha = (LinearLayout) findViewById(R.id.llRegistrosFechas);
-        llRegistrosFecha.setVisibility(View.GONE);
+        vistaComun();
 
         if (id == R.id.nav_tratamientos) {
             requestTratamientosHttp();
@@ -131,11 +138,27 @@ public class DetallePacienteActivity extends AppCompatActivity
             requestConsejosHttp();
         }else if (id == R.id.nav_consejo) {
             desplegarFormatoEnvioConsejo();
+        }else if (id == R.id.nav_recibir_notificaciones) {
+            requestNotificacionesHttp();
+        }else if (id == R.id.nav_config_marcapasos) {
+            desplegarFormatoConfiguracionMarcapasos();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void vistaComun()
+    {
+        LinearLayout llRegistrosFecha = (LinearLayout) findViewById(R.id.llRegistrosFechas);
+        llRegistrosFecha.setVisibility(View.GONE);
+        editAsunto.setVisibility(View.GONE);
+        editConsejo.setVisibility(View.GONE);
+        btnEnviarConsejo.setVisibility(View.GONE);
+        tvDetalle.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.VISIBLE);
+
     }
 
 
@@ -292,24 +315,65 @@ public class DetallePacienteActivity extends AppCompatActivity
             }
         });
     }
+    private void requestNotificacionesHttp()
+    {
+
+        tvDetalle.setText("notificaciones: ");
+        //traduccion del response a un arreglo
+        ArrayList<String> notificaciones = new ArrayList<String>();
+        notificaciones.add("Frecuencia cardiaca: 57 Actividad fisica:2 Nivel Estres: 9 Presion sanguinea:149-83 Fecha: "+new Date()+"Color: ROJO");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, notificaciones);
+        //Con arreglo se crea adapter, que genera la listView
+        listView.setAdapter(adapter);
+    }
+
+
+    public void accionBoton(View view)
+    {
+        if(btnEnviarConsejo.getText().toString().equals("Configurar marcapasos"))
+            enviarConfiguracionMarcapasos();
+        else
+            enviarConsejo();
+    }
+
+    private  void desplegarFormatoConfiguracionMarcapasos()
+    {
+        tvDetalle.setVisibility(View.GONE);
+        listView.setVisibility(View.GONE);
+        EditText editAsunto = (EditText)findViewById(R.id.editAsunto);
+        editAsunto.setHint("Frecuencia");
+        editAsunto.setVisibility(View.VISIBLE);
+        Button btnEnviarConsejo = (Button)findViewById(R.id.btnEnviarConsejo);
+        btnEnviarConsejo.setVisibility(View.VISIBLE);
+        btnEnviarConsejo.setText("Configurar marcapasos");
+    }
+
+    private void enviarConfiguracionMarcapasos()
+    {
+        EditText editAsunto = (EditText)findViewById(R.id.editAsunto);
+        Button btnEnviarConsejo = (Button)findViewById(R.id.btnEnviarConsejo);
+
+
+        Toast.makeText(this, "Configuracion enviada!", Toast.LENGTH_SHORT).show();
+        tvDetalle.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.VISIBLE);
+        editAsunto.setVisibility(View.GONE);
+        btnEnviarConsejo.setVisibility(View.GONE);
+    }
 
     private void desplegarFormatoEnvioConsejo() {
         //Se hacen visibles solo los campos para enviar consejo
         tvDetalle.setVisibility(View.GONE);
         listView.setVisibility(View.GONE);
-        EditText editAsunto = (EditText)findViewById(R.id.editAsunto);
         editAsunto.setVisibility(View.VISIBLE);
-        EditText editConsejo = (EditText)findViewById(R.id.editConsejo);
         editConsejo.setVisibility(View.VISIBLE);
-        Button btnEnviarConsejo = (Button)findViewById(R.id.btnEnviarConsejo);
         btnEnviarConsejo.setVisibility(View.VISIBLE);
+        btnEnviarConsejo.setText("Enviar Consejo a Paciente");
     }
 
-    public void enviarConsejo(View view){
+    public void enviarConsejo(){
         //Se envia y se encarga de regresar al estado original
-        EditText editAsunto = (EditText)findViewById(R.id.editAsunto);
-        EditText editConsejo = (EditText)findViewById(R.id.editConsejo);
-        Button btnEnviarConsejo = (Button)findViewById(R.id.btnEnviarConsejo);
+
 
         String asunto = editAsunto.getText().toString();
         String descripcion = editConsejo.getText().toString();
